@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Администрирование</title>
+</head>
+
+<body>
+<h2>Администрирование</h2>
+    <div th:switch="${users}">
+        <h2 th:case="null">Пользователи в базе данных отсутствуют</h2>
+        <div th:case="*">
+            <h2>Пользователи</h2>
+            <table>
+                <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Имя пользователя</td>
+                    <td>Пароль</td>
+                    <td>Email</td>
+                    <td>Имя</td>
+                    <td>Фамилия</td>
+                    <td>Роль</td>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="user : ${users}">
+
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.password}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.surname}"></td>
+                    <td th:text="${user.role}"></td>
+                    <td><a th:href="@{/userUpdateAdmin/{id}(id=${user.id})}" >Edit</a></td>
+                    <td><a th:href="@{/userDelete/{id}(id=${user.id})}" >Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <button type="submit"><a th:href="@{/userCreate}">Создать пользователя</a></button>
+        <button type="submit"><a th:href="@{home}">Домой</a></button>
+    </div>
+
+</body>
+</html>
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактор</title>
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<form action="#" th:action="@{/userUpdate}" th:object="${user}" method="post">
+
+    <input type="text" th:field="*{id}" hidden="hidden"/>
+
+    <label for="name">Имя:</label>
+    <input type="text" th:field="*{name}" id="name" placeholder="Имя"/><br>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:errorclass="error"></p>
+
+    <label for="surname">Фамилия:</label>
+    <input type="text" th:field="*{surname}" id="surname" placeholder="Фамилия"/><br>
+    <p th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" th:errorclass="error"></p>
+
+    <label for="password">Пароль:</label>
+    <input type="password" th:field="*{password}" id="password" placeholder="Пароль"/><br>
+
+    <label for="passwordConfirm">Повторите пароль:</label>
+    <input type="password" th:field="*{passwordConfirm}" id="passwordConfirm" placeholder="Пароль"/><br>
+
+    <div th:if="${#fields.hasGlobalErrors()}">
+        <p th:each="err : ${#fields.globalErrors()}" th:text="${err}" class="error"></p>
+    </div>
+
+    <input type="submit" value="Изменить">
+    <input type="submit" value="Назад" th:action="@{/page}">
+</form>
+</body>
+</html>

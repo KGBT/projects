@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Домашняя страница</title>
+</head>
+<body>
+    <h1>Добро пожаловать, <b th:text="${user.name}"></b>
+    <b th:text="${user.surname}"></b>
+    </h1>
+    <div>
+        <p><button type="submit"><a th:href="@{page}">Моя страница</a></button></p>
+        <p th:if="${user.role == 'ROLE_ADMIN'}"><button type="submit" ><a th:href="@{/administration}">Администрирование</a></button></p>
+    </div>
+    <form action="#" th:action="@{/logout}" method="post">
+        <button type="submit">Выйти</button>
+    </form>
+</body>
+</html>

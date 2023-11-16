@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h2>Регистрация</h2>
+<form action="#" th:action="@{/registration}" th:object="${user}" method="post">
+
+    <label for="username">Имя пользователя:</label>
+    <input type="text" th:field="*{username}" id="username" autocomplete="false" placeholder="Имя пользователя"/><br>
+    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:errorclass="error"></p>
+
+    <label for="email">Email:</label>
+    <input type="text" th:field="*{email}" id="email" autocomplete="false" placeholder="Email"/><br>
+    <p th:if="${#fields.hasErrors('email')}"  th:errors="*{email}" th:errorclass="error"></p>
+
+    <label for="name">Имя:</label>
+    <input type="text" th:field="*{name}" id="name" placeholder="Имя"/><br>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:errorclass="error"></p>
+
+    <label for="surname">Фамилия:</label>
+    <input type="text" th:field="*{surname}" id="surname" placeholder="Фамилия"/><br>
+    <p th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" th:errorclass="error"></p>
+
+    <label for="password">Пароль:</label>
+    <input type="password" th:field="*{password}" id="password" placeholder="Пароль"/><br>
+
+
+    <label for="passwordConfirm">Повторите пароль:</label>
+    <input type="password" th:field="*{passwordConfirm}" id="passwordConfirm" placeholder="Пароль"/><br>
+
+    <div th:if="${#fields.hasGlobalErrors()}">
+        <p th:each="err : ${#fields.globalErrors()}" th:text="${err}" class="error"></p>
+    </div>
+
+    <input type="submit" value="Зарегистрироваться">
+</form>
+
+</body>
+</html>
+
